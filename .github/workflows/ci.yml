@@ -24,16 +24,16 @@ jobs:
           - 21
         os:
           - macOS-latest
-          - ubuntu-latest
-          - windows-latest
+          - ubuntu-22.04
+          - windows-2022
         exclude:
           - arch: x86
             os: macOS-latest
           - arch: x86
-            os: ubuntu-latest
+            os: ubuntu-22.04
           - arch: x86
             node: 18
-            os: windows-latest
+            os: windows-2022
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -45,7 +45,7 @@ jobs:
       - run: npm install
       - run: npm run lint
         if:
-          matrix.os == 'ubuntu-latest' && matrix.node == 20 && matrix.arch ==
+          matrix.os == 'ubuntu-22.04' && matrix.node == 20 && matrix.arch ==
           'x64'
       - run: npm test
       - run: |
@@ -63,7 +63,7 @@ jobs:
           parallel: true
   coverage:
     needs: test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: coverallsapp/github-action@v2
         with:
